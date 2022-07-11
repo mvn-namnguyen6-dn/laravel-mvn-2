@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/redirect','PostController@redirectRoute');
+Route::get('/showpost','PostController@index');
+
+Route::get('/addpost','PostController@create');
+Route::post('savepost','PostController@store');
+
+
+Route::get('editpost/{id}','PostController@edit');
+Route::post('updatepost','PostController@update');
+
+Route::get('deletepost/{id}','PostController@destroy');
