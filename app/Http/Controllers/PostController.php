@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -15,6 +16,10 @@ class PostController extends Controller
      */
     public function index()
     {
+
+        if (! Gate::allows('list-post')) {
+            abort(403);
+        }
         $data = Post::get();
 
         return view('post.show', compact('data'));
@@ -28,7 +33,9 @@ class PostController extends Controller
     public function create()
     {
 
-
+        if (! Gate::allows('create-post')) {
+            abort(403);
+        }
         return view('post.add');
     }
 
@@ -110,7 +117,10 @@ class PostController extends Controller
         Post::where('id','=',$id )->delete();
         return redirect()->back()->with('success', 'User delete sucessfully');
     }
-
+    public function detail($id){
+        $data = Post::where('id', '=', $id)->first();
+        return view('post.detail', compact('data'));
+    }
     public function redirectRoute(){
         return redirect()->to('/showpost');
     }

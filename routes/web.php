@@ -31,5 +31,5 @@ Route::post('savepost','PostController@store');
 
 Route::get('editpost/{id}','PostController@edit');
 Route::post('updatepost','PostController@update');
-
+Route::get('detailpost/{id}','PostController@detail');
 Route::get('deletepost/{id}','PostController@destroy');

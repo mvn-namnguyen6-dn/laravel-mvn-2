@@ -33,7 +33,8 @@
                     <td>{{ $post->content }}</td>
                     <td>
                         <a class="edit" href="{{ url('editpost/' . $post->id) }}"> Edit </a>|
-                        <a class="delete" href="{{ 'deletepost/' . $post->id }}"> Delete</a>
+                        <a class="delete" href="{{ 'deletepost/' . $post->id }}"> Delete</a>|
+                        <a class="detail" href="{{ 'detailpost/' . $post->id }}"> detail</a>
                     </td>
                 </tr>
             @endforeach
