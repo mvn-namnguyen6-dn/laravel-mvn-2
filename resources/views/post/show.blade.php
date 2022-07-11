@@ -13,6 +13,7 @@
     <div>
         <a class="addpost" href="{{ url('addpost') }}">add</a>
     </div>
+
     <table class="table table-success table-striped">
         <thead>
             <tr>
@@ -32,13 +33,18 @@
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->content }}</td>
                     <td>
-                        <a class="edit" href="{{ url('editpost/' . $post->id) }}"> Edit </a>|
+                        @can('update', $post)
+                            <a class="edit" href="{{ url('editpost/' . $post->id) }}"> Edit </a>|
+                        @endcan
+                        @can('delete', $post)
                         <a class="delete" href="{{ 'deletepost/' . $post->id }}"> Delete</a>|
+                        @endcan
                         <a class="detail" href="{{ 'detailpost/' . $post->id }}"> detail</a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
 </div>
 @endsection

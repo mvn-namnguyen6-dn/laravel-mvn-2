@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Route::get('/addpost','PostController@create');
 Route::post('savepost','PostController@store');
 
 
-Route::get('editpost/{id}','PostController@edit');
+Route::get('editpost/{id}','PostController@edit')->middleware('can:update,post');
 Route::post('updatepost','PostController@update');
 Route::get('detailpost/{id}','PostController@detail');
 Route::get('deletepost/{id}','PostController@destroy');

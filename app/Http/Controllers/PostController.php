@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use PhpParser\Node\Expr\AssignOp\Pow;
 
 class PostController extends Controller
 {
@@ -16,9 +18,8 @@ class PostController extends Controller
      */
     public function index()
     {
-
-        if (! Gate::allows('list-post')) {
-            abort(403);
+        if (Auth::user()->cannot('viewAny', Post::class)) {
+            return view('post.add');
         }
         $data = Post::get();
 
@@ -33,7 +34,7 @@ class PostController extends Controller
     public function create()
     {
 
-        if (! Gate::allows('create-post')) {
+        if (Auth::user()->cannot('create', Post::class)) {
             abort(403);
         }
         return view('post.add');
@@ -77,8 +78,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $data = Post::where('id', '=', $id)->first();
-        return view('post.edit', compact('data'));
+        $post = Post::findOrFail($id);
+        return view('post.edit', compact('post'));
     }
 
     /**
