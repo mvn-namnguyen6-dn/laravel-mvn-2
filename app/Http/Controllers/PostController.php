@@ -16,6 +16,16 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+     public function viewpost($id){
+        // $data = User::where('id', $id)->with('posts')->get();
+
+        $data = Post::where('user_id',$id)->get();
+        // dd($data)->array();
+        // return $data;
+        return view('user.showpost', compact('data'));
+     }
     public function index()
     {
         if (Auth::user()->cannot('viewAny', Post::class)) {
