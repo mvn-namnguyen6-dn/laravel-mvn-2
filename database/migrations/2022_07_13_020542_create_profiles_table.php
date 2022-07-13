@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStatusRoleUserTable extends Migration
+class CreateProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class AddStatusRoleUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('role')->nullable()->after('email');
-            $table->integer('status')->nullable()->after('email');
+        Schema::create('profiles', function (Blueprint $table) {
+            $table->id();
+            $table->string('address');
+            $table->string('tel');
+            $table->integer('user_id');
+            $table->string('province');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +30,6 @@ class AddStatusRoleUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('profiles');
     }
 }
