@@ -32,11 +32,43 @@ class UserController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = User::get();
-        // return $data;
-        return view('user.show', compact('data'));
+        $data = User::with('comments','posts')->simplePaginate(10);
+
+        $sortType = $request->input('sort-type');
+
+        $allowSort = ['asc','desc','default'];
+
+        if(!empty($sortType) && in_array($sortType,$allowSort)){
+            if($sortType=='desc'){
+                $sortType='asc';
+                $data = User::orderBy('name', 'DESC')->simplePaginate(10);
+                  return view('user.show', compact('data','sortType'));
+            }else{
+                $sortType='desc';
+                $data = User::orderBy('name', 'ASC')->simplePaginate(10);
+                return view('user.show', compact('data','sortType'));
+            }
+        }else{
+            $sortType='asc';
+        }
+        if(!empty($sortType) && in_array($sortType,$allowSort)){
+            if($sortType=='desc'){
+                $sortType='asc';
+                $data = User::orderBy('age', 'DESC')->simplePaginate(10);
+                  return view('user.show', compact('data','sortType'));
+            }else{
+                $sortType='desc';
+                $data = User::orderBy('age', 'ASC')->simplePaginate(10);
+                return view('user.show', compact('data','sortType'));
+            }
+        }else{
+            $sortType='asc';
+        }
+
+
+        return view('user.show', compact('data','sortType'));
     }
 
     /**
@@ -72,7 +104,17 @@ class UserController extends Controller
         $user->password = $password;
         $user->age =$age;
         $user->birthday =$birthday;
+        if($request->hasFile('avatar')){
+            $file= $request->file('avatar');
+            $extention = $file->getClientOriginalExtension();
+            $filename= time().'.'.$extention;
+            $file-> move('public/image/', $filename);
+            $user->avatar= $filename;
+        }
         $user->save();
+
+
+
         return redirect()->route('user.index');
 
     }

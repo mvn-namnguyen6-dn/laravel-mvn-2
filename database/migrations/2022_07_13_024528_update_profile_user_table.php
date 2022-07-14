@@ -16,7 +16,7 @@ class UpdateProfileUserTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->integer('age')->nullable()->after('name');
             $table->dateTime('birthday')->nullable()->after('age');
-            $table->string('avatar')->nullable()->after('birthday');
+            $table->string('avatar')->after('birthday');
         });
     }
 

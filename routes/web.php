@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SearchController;
 
 use App\Models\Post;
 use App\Models\User;
@@ -44,7 +45,18 @@ Route::get('/showuser','UserController@index')->name('user.index');
 Route::get('/adduser','UserController@create');
 Route::post('saveuser','UserController@store');
 Route::get('/showcmt/{id}','CommentController@index');
+// Route::get('/showpostuser/{id}','PostController@index');
+
 Route::get('/showall/{id}','UserController@viewdetail');
 Route::get('/showpost/{id}','PostController@viewpost');
 Route::get('/deleteuser/{id}','UserController@destroy');
 Route::get('/userdetail/{id}','UserController@viewuserdetail');
+
+
+
+//search
+
+
+Route::get('/search', 'SearchController@search')->name('web.search');
+// Route::get('/search', 'SearchController@searchDataPost')->name('web.searchpost');
+

@@ -19,7 +19,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
-
+    public function profiles()
+    {
+        return $this->belongsTo('App\Models\Profile');
+    }
 
 
 
@@ -36,7 +39,7 @@ class User extends Authenticatable
         // 'status',
         'age',
         'birthday',
-        // 'avatar',
+        'avatar',
     ];
 
     /**

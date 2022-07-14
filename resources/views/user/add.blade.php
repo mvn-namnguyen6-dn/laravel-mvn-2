@@ -10,7 +10,7 @@
                 {{ Session::get('success') }}
             </div>
         @endif
-        <form method="post" action="{{ url('saveuser') }}">
+        <form method="post" action="{{ url('saveuser') }}"   enctype="multipart/form-data">
             @csrf
             Name:<br>
             <input type="text" name="name" value=""><br>
@@ -22,6 +22,8 @@
             <input type="text" name="age" value=""><br>
             birthday:<br>
             <input type="date" name="birthday" value=""><br>
+            Avatar:
+            <input type="file" name="avatar" value="">
             <br>
             <input type="submit" value="Submit">
             <a class="back" href="{{ url('showuser') }}"> back </a>
