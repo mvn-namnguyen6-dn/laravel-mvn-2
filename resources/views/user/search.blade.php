@@ -9,6 +9,11 @@
                 <div>
                     <label for=""> Enter key</label>
                     <input type="text" class="form-control" name="query" placeholder="Search ...." />
+                    <select name="select_search">
+                        <option value="0">name</option>
+                        <option value="1">posts</option>
+                        <option value="2">comments</option>
+                    </select>
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary"> Search</button>
@@ -33,8 +38,9 @@
             <th scope="col">birthday</th>
             <th scope="col">avatar</th>
             <th scope="col">email</th>
-            <th scope="col">sum post</th>
             <th scope="col">sum comment</th>
+            <th scope="col">sum post</th>
+
 
             <th scope="col"> action </th>
         </tr>
@@ -77,7 +83,7 @@
         @endforeach
     </tbody>
 </table>
-{{$data->links('layouts.paginationlinks')}}
+
 @endif
 
 

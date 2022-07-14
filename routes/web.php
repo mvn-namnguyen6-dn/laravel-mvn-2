@@ -58,5 +58,4 @@ Route::get('/userdetail/{id}','UserController@viewuserdetail');
 
 
 Route::get('/search', 'SearchController@search')->name('web.search');
-// Route::get('/search', 'SearchController@searchDataPost')->name('web.searchpost');
 
