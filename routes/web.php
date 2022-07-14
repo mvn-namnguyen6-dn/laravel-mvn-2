@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SearchController;
+
+use App\Models\Post;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +27,35 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// post
+Route::get('/redirect','PostController@redirectRoute');
+Route::get('/showpost','PostController@index');
+Route::get('/addpost','PostController@create');
+Route::post('savepost','PostController@store');
+Route::get('editpost/{id}','PostController@edit')->middleware('can:update,post');
+Route::post('updatepost','PostController@update');
+Route::get('detailpost/{id}','PostController@detail');
+Route::get('deletepost/{id}','PostController@destroy');
+
+
+
+// user
+Route::get('/showuser','UserController@index')->name('user.index');
+Route::get('/adduser','UserController@create');
+Route::post('saveuser','UserController@store');
+Route::get('/showcmt/{id}','CommentController@index');
+// Route::get('/showpostuser/{id}','PostController@index');
+
+Route::get('/showall/{id}','UserController@viewdetail');
+Route::get('/showpost/{id}','PostController@viewpost');
+Route::get('/deleteuser/{id}','UserController@destroy');
+Route::get('/userdetail/{id}','UserController@viewuserdetail');
+
+
+
+//search
+
+
+Route::get('/search', 'SearchController@search')->name('web.search');
+
