@@ -11,6 +11,21 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    public function profiles()
+    {
+        return $this->belongsTo('App\Models\Profile');
+    }
+
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,9 +34,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'role',
-        'status'
+        // 'password',
+        // 'role',
+        // 'status',
+        'age',
+        // 'birthday',
+        'avatar',
     ];
 
     /**
