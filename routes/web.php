@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -59,3 +60,14 @@ Route::get('/userdetail/{id}','UserController@viewuserdetail');
 
 Route::get('/search', 'SearchController@search')->name('web.search');
 
+// ajax
+
+
+Route::get('/userajax', 'AjaxController@index');
+Route::post('/userajax', 'AjaxController@store');
+Route::get('fetch-user', 'AjaxController@fetchuser');
+
+Route::get('edit-user/{id}','AjaxController@edit');
+Route::put('update-user/{id}', 'AjaxController@update');
+
+Route::delete('delete-user/{id}', 'AjaxController@destroy');
